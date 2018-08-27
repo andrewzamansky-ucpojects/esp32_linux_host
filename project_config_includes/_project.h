@@ -14,6 +14,7 @@
 #include "_project_typedefs.h"
 #include "_project_defines.h"
 #include "_project_func_declarations.h"
+#include "_project_tasks_defines.h"
 
 
 #endif /* */

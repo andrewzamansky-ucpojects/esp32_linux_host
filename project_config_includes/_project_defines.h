@@ -13,7 +13,8 @@
 
 #include "project_config.h"
 #include <stddef.h> // include for NULL
-
+#include <stdio.h>
+#include <stdlib.h>
 
 #ifdef __cplusplus
 	#define  EXTERN_C_FUNCTION    extern "C"
@@ -23,7 +24,7 @@
 
 
 
-#define CRITICAL_ERROR(str)   {while(1);}
+#define CRITICAL_ERROR(str)   {printf("%s\n", str); exit(0);}
 
 
 
