@@ -38,7 +38,7 @@
 
 #define ASYNC_RX_WRAPPER_DT_SERVER_PDEV        esp8266_uart_dev
 #define ASYNC_RX_WRAPPER_DT_CLIENT_PDEV        esp8266_dev
-#define ASYNC_RX_WRAPPER_DT_RX_BUFFER_SIZE     255
+#define ASYNC_RX_WRAPPER_DT_RX_BUFFER_SIZE     4096
 
 #include ADD_CURRENT_DEV
 
@@ -71,6 +71,7 @@
 #define ESP8266_DT_TIMER_PDEV         esp8266_timer_dev
 #define ESP8266_DT_UART_TX_DEV        esp8266_uart_tx_wrap_dev
 #define ESP8266_DT_UART_RX_DEV        esp8266_uart_rx_wrap_dev
+#define ESP8266_DT_UART_DEV           esp8266_uart_dev
 
 #include ADD_CURRENT_DEV
 

@@ -14,15 +14,17 @@
 
 #include <string.h> /* memcpy, memset */
 #include <unistd.h>
+#include <uart_api.h>
 
 void error(char const *msg)
 {
-	perror(msg);
+	printf("%s\n", msg);
 }
 
 
 extern  struct dev_desc_t *esp8266_dev;
 extern  struct dev_desc_t *esp8266_uart_tx_wrap_dev;
+extern  struct dev_desc_t *esp8266_uart_dev;
 
 int main( void )
 {
@@ -47,14 +49,28 @@ int main( void )
 			"\r\n";
 
 #if defined(USE_OUR_SOCKET_API)
-	//#define TEST_UART
+//	#define TEST_UART
 	#if defined(TEST_UART)
+		uint32_t interface_device_speed  = 921600;
+		DEV_IOCTL(esp8266_uart_dev,
+				IOCTL_UART_SET_BAUD_RATE, &interface_device_speed);
+
 		DEV_IOCTL_0_PARAMS(esp8266_uart_tx_wrap_dev, IOCTL_DEVICE_START);
 		while(1)
 		{
 			static int cnt = 0;
 			static char test_str[] = "test_xxxxxx";
 
+			if (0 == (cnt %2))
+			{
+				interface_device_speed  = 921600;
+			}
+			else
+			{
+				interface_device_speed  = 115200;
+			}
+			DEV_IOCTL(esp8266_uart_dev,
+					IOCTL_UART_SET_BAUD_RATE, &interface_device_speed);
 			snprintf(test_str, 12, "test_%d\n", cnt++);
 			DEV_WRITE(esp8266_uart_tx_wrap_dev, (uint8_t*)test_str, strlen(test_str));
 			sleep(5);
